@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "auto-connect-midi"
+version = "0.1.0"
+description = "auto connect usb midi devices when they are plugged in"
+authors = ["Ryan Prince <judascleric@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "auto_connect_midi" },
+    { include = "config" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyudev = "^0.24.1"
+alsa-midi = "^1.0.2"
+simple-term-menu = "^1.6.4"
+dataclasses-json = "^0.6.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.1.1"
+pylint = "^3.0.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+auto-connect-midi = "auto_connect_midi.main:main"
+config = "config.midi_config:main"
+
