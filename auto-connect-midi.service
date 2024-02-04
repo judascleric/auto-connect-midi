@@ -1,0 +1,15 @@
+[Unit]
+Description=auto-connect-midi service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=unset
+ExecStart=/usr/local/bin/auto-connect-midi
+
+[Install]
+WantedBy=multi-user.target
+

@@ -4,7 +4,8 @@ Automatically connect USB MIDI devices when they are plugged in.
 
 ## Prerequisites
 * alsa audio (already installed on Raspberry Pi OS)
-* `sudo apt install python3-dev libffi-dev poetry`
+* python3 (already installed on Raspberry Pi OS)
+* dev dependencies: `sudo apt install python3-dev python3-pip libffi-dev poetry`
 
 
 ## usage

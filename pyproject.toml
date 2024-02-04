@@ -26,5 +26,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 auto-connect-midi = "auto_connect_midi.auto_connect_midi:main"
-config = "config.midi_config:main"
+auto-connect-midi-config = "config.midi_config:main"
 
