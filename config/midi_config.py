@@ -50,6 +50,13 @@ def add_connection(client, config_path):
     selected_in_id = in_conn_menu.show()
     if selected_in_id >= len(in_ports):
         return
+    in_port = in_ports[selected_in_id]
+    in_dev = Device(name=in_port.client_name, client_id=in_port.client_id)
+    port_options = [f"Connect first device named {in_dev.name}", f"Only for port {in_dev.client_id}"]
+    port_select = TerminalMenu(port_options, title="Match device name or use specific port?")
+    port_select_id = port_select.show()
+    if port_select_id == 0:
+        in_dev.client_id = 0
 
     out_ports = [port for port in client.list_ports(output=True) if port.client_name not in IGNORE_PORT_NAMES]
     out_names = [f"[{port.client_id}] {port.client_name}" for port in out_ports] + ["Cancel"]
@@ -57,15 +64,18 @@ def add_connection(client, config_path):
     selected_out_id = out_conn_menu.show()
     if selected_out_id >= len(out_ports):
         return
+    out_port = out_ports[selected_out_id]
+    out_dev = Device(name=out_port.client_name, client_id=out_port.client_id)
+    port_options = [f"Connect first device named {out_dev.name}", f"Only for port {out_dev.client_id}"]
+    port_select = TerminalMenu(port_options, title="Match device name or use specific port?")
+    port_select_id = port_select.show()
+    if port_select_id == 0:
+        out_dev.client_id = 0
 
     config_dir = os.path.dirname(os.path.realpath(config_path))
     if not os.path.isdir(config_dir):
         os.makedirs(config_dir)
 
-    in_port = in_ports[selected_in_id]
-    in_dev = Device(name=in_port.client_name, client_id=in_port.client_id)
-    out_port = out_ports[selected_out_id]
-    out_dev = Device(name=out_port.client_name, client_id=out_port.client_id)
     connection = Connection(input=in_dev, output=out_dev)
 
     old_config = read_config(config_path)
